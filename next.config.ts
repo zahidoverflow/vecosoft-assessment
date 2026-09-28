@@ -1,10 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/vecosoft-assessment",
-  assetPrefix: "/vecosoft-assessment/",
-  images: { unoptimized: true },
+  allowedDevOrigins: ["192.168.0.5"],
 };
 
 export default nextConfig;

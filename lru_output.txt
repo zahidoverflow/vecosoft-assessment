@@ -1,0 +1,15 @@
+=== LRU Cache Test ===
+Initializing Cache(2)
+cache.put("A", 10)
+Cache state: [ [ 'A', 10 ] ]
+cache.put("B", 20)
+Cache state: [ [ 'B', 20 ], [ 'A', 10 ] ]
+cache.get("A") -> 10
+Cache state (A is most recently used): [ [ 'A', 10 ], [ 'B', 20 ] ]
+cache.put("C", 30) (This should evict "B")
+Cache state: [ [ 'C', 30 ], [ 'A', 10 ] ]
+cache.get("B") -> -1
+cache.get("C") -> 30
+cache.get("A") -> 10
+
+=== Test Complete ===

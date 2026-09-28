@@ -1,0 +1,15 @@
+Via browseros-neo MCP you can just read the opened email of Vecosoft. 
+
+- You gotta navigate https://assessment.vecosoft.com/assessment/login. Log in using my official Email: "zahidoverflow@gmail.com" and that mentioned Access Code: "VSOFT-JMTG-8B5L".
+
+- Navigate to the dashboard, start the assessment, and extract all instructions, criteria, and requirements for all 4 tasks. Initialize a Next.js (App Router), TypeScript, and Tailwind CSS repository. 
+
+- Implement all 4 tasks completely with clean modular components, static/mock data, responsive layouts, and zero TypeScript/lint errors. 
+
+- Create the mandatory AI_PROMPT_HISTORY.txt containing only this prompt I am writing, set up a production-ready README.md, initialize git, and commit all code task-by-task.
+
+- You can use gh github cli in which I am already logged in.
+
+- Keep doing and monitoring of each task and lemme know on real time.
+
+I am watching. Start now.

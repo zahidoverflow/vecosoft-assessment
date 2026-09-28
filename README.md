@@ -1,40 +1,130 @@
-# Vecosoft Assessment
+<div align="center">
 
-This repository contains the completed tasks for the Vecosoft Frontend Developer Practical Assessment.
+# 🛍️ Vecosoft Frontend Assessment
 
-## Task 1: Order Tracking Screen
-A modern, professional mobile Order Tracking screen implemented in React (Next.js App Router) with Tailwind CSS. It supports all three required states: Delayed Order, Delivered but Not Received, and Tracking Not Available Yet.
+**Frontend Developer Practical Assessment — Zahidul Islam**
 
-### How to Run
-1. Install dependencies: `npm install`
-2. Run the development server: `npm run dev`
-3. Open [http://localhost:3000](http://localhost:3000) in your browser.
-4. Use the "Testing Controls" buttons at the top of the page to switch between the different order states.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-0070f3?style=for-the-badge&logo=vercel&logoColor=white)](https://zahidoverflow.github.io/vecosoft-assessment/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zahidoverflow/vecosoft-assessment)
 
-## Task 2 & 3: LRU Cache Implementation & Explanation
+![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
 
-The LRU Cache is implemented in `src/lib/LRUCache.ts`. A test script is provided in `scripts/test-lru.ts`.
+</div>
 
-### How to Run the LRU Cache Test
-Run the test script using `tsx`:
+---
+
+## 📋 Tasks Overview
+
+| # | Task | Status | Score Weight |
+|---|------|--------|-------------|
+| 1 | Order Tracking Screen | ✅ Complete | 40 pts |
+| 2 | LRU Cache Implementation | ✅ Complete | 30 pts |
+| 3 | Algorithm Explanation & Critical Thinking | ✅ Complete | 15 pts |
+| 4 | Figma / UI Design | _(Optional — code prototype used)_ | 10 pts |
+
+---
+
+## Task 1 — Order Tracking Screen
+
+> A responsive, mobile-first Order Tracking UI (360–430px target width) built with Next.js App Router and Tailwind CSS.
+
+**All 3 required states are implemented:**
+
+| State | Description |
+|-------|-------------|
+| 🟡 **Delayed Order** | Displays amber alert with revised delivery date |
+| 🔴 **Delivered but Not Received** | Prompts user to report missing package |
+| 🔵 **Tracking Not Available Yet** | Shows informational placeholder without empty screen |
+
+An evaluator switcher is rendered at the top of the live demo page to toggle between states instantly.
+
+### Run Locally
+
+```bash
+npm install
+npm run dev
+# Open http://localhost:3000
+```
+
+---
+
+## Task 2 — LRU Cache Implementation
+
+> Implemented in [`src/lib/LRUCache.ts`](./src/lib/LRUCache.ts) — `O(1)` `get` and `put` using a Hash Map + Doubly Linked List.
+
+```
+cache = Cache(2)
+cache.put("A", 10)
+cache.put("B", 20)
+cache.get("A")        → 10
+cache.put("C", 30)    ← evicts "B" (LRU)
+cache.get("B")        → -1
+cache.get("C")        → 30
+cache.get("A")        → 10
+```
+
+### Run the Test Script
+
 ```bash
 npx tsx scripts/test-lru.ts
 ```
 
+The output matches the example exactly. Screenshot of real output is in [`lru_output.txt`](./lru_output.txt).
+
+---
+
+## Task 3 — Algorithm Explanation & Critical Thinking
+
 ### 1. Data Structures Used
-I used a combination of a **Hash Map (`Map` in TypeScript)** and a **Doubly Linked List**.
-- **Hash Map**: Stores the keys and their corresponding linked list nodes. This allows $O(1)$ time complexity for lookups.
-- **Doubly Linked List**: Keeps track of the most and least recently used items. The head represents the most recently used (MRU) item, while the tail represents the least recently used (LRU) item. A doubly linked list is necessary because we need to move a node from the middle of the list to the head in $O(1)$ time, which requires updating pointers of both the previous and next nodes.
+A **Hash Map** (`Map<K, Node>`) combined with a **Doubly Linked List**.
+- The Map provides O(1) key lookup directly to a node reference.
+- The Doubly Linked List maintains LRU order — the head is the most recently used (MRU) and the tail is the least recently used (LRU). Double links are required to remove a middle node in O(1) without traversal.
 
-### 2. Time and Space Complexity
-- **Time Complexity**: $O(1)$ on average for both `get` and `put` operations. Map lookups are $O(1)$, and adding/removing nodes in a doubly linked list is $O(1)$ since we have direct references to the nodes.
-- **Space Complexity**: $O(C)$ where $C$ is the capacity of the cache. The hash map and the doubly linked list both store at most $C$ elements.
+### 2. Time & Space Complexity
+| Operation | Time | Space |
+|-----------|------|-------|
+| `get(key)` | O(1) | — |
+| `put(key, value)` | O(1) | — |
+| Total storage | — | O(capacity) |
 
-### 3. Realistic Limitation / Poor Performance Pattern
-This implementation could perform poorly or face limitations in a highly concurrent, multi-threaded environment (though less relevant in single-threaded Node.js without workers). A more realistic limitation is memory overhead: every entry requires an object (node) with pointers (`prev`, `next`), which consumes more memory per item than a simple array or hash map. If the cached items are very small (e.g., boolean flags) and the capacity is extremely large, the overhead of the node wrappers could dominate memory usage and trigger frequent garbage collection pauses.
+### 3. Known Limitation
+The biggest real-world limitation is **per-entry object overhead**. Every cached item is wrapped in a `Node` object with `prev` / `next` pointers. For very high-capacity caches storing tiny values (e.g., boolean flags), the node wrapper memory cost can dwarf the data cost and increase GC pressure. A slab or ring-buffer approach would reduce allocations in that scenario.
 
-### 4. AI Assistance Note
-AI assisted in scaffolding the initial structure of this repository and providing boilerplate for the UI. No AI suggestions were rejected as the code was developed modularly, though specific adjustments to Tailwind classes were manually curated for exact alignment with standard ecommerce patterns. (As requested, the full prompt history is included in `AI_PROMPT_HISTORY.txt`).
+### 4. AI Usage Note
+AI was used to scaffold the Next.js boilerplate and structure the repo. The LRU implementation logic was written directly. The full prompt history is in [`AI_PROMPT_HISTORY.txt`](./AI_PROMPT_HISTORY.txt) as required.
 
-## Task 4: Figma / UI Design (Optional)
-The optional Figma design step was skipped in favor of a direct, pixel-perfect code implementation provided in Task 1. The interactive live UI serves as the prototype.
+---
+
+## Task 4 — Figma / UI Design _(Optional)_
+
+The interactive live code prototype at the demo link above serves as the UI design deliverable. All three states are fully rendered and interactive in the browser.
+
+---
+
+## Project Structure
+
+```
+vecosoft-assessment/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx              # Home — renders OrderTracking with state switcher
+│   │   ├── layout.tsx
+│   │   └── globals.css
+│   ├── components/
+│   │   └── OrderTracking.tsx     # Task 1 — full UI component
+│   └── lib/
+│       └── LRUCache.ts           # Task 2 — O(1) LRU Cache
+├── scripts/
+│   └── test-lru.ts               # Task 2 — test/demo script
+├── lru_output.txt                 # Task 2 — real terminal output
+├── AI_PROMPT_HISTORY.txt          # Mandatory AI prompt log
+└── README.md
+```
+
+---
+
+<div align="center">
+  <sub>Zahidul Islam · zahidoverflow@gmail.com · 2026</sub>
+</div>

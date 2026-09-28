@@ -4,7 +4,7 @@
 
 **Frontend Developer Practical Assessment — Zahidul Islam**
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-0070f3?style=for-the-badge&logo=vercel&logoColor=white)](https://zahidoverflow.github.io/vecosoft-assessment/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-0070f3?style=for-the-badge&logo=vercel&logoColor=white)](https://vecosoft-assessment-tan.vercel.app/)
 [![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/zahidoverflow/vecosoft-assessment)
 
 ![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=next.js&logoColor=white)
